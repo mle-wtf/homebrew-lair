@@ -1,8 +1,8 @@
 class LairMinion < Formula
   desc "Desktop half of LAIR: bridges your local CLI coding agent to your phone"
   homepage "https://lair.mle.wtf"
-  url "https://github.com/mle-wtf/lair-releases/releases/download/v26.8.5099/lair-minion-26.8.5099-macos-universal.tar.gz"
-  sha256 "610a7f950712675773aca35614e7e96f74848208e79155ecd4dac31bd19ad047"
+  url "https://github.com/mle-wtf/lair-releases/releases/download/v26.8.5955/lair-minion-26.8.5955-macos-universal.tar.gz"
+  sha256 "a4e638f5e12bdd51956e18ccb2ff4904e1785b9fccd0241f25bd2c595f03b95f"
 
   # A universal binary, so one bottle-less formula serves both arches. The
   # tarball is prebuilt because the source repo is private and brew could not
