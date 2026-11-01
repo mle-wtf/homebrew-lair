@@ -1,14 +1,15 @@
-class LairMinion < Formula
+class Lair < Formula
   desc "Desktop half of LAIR: bridges your local CLI coding agent to your phone"
   homepage "https://lair.mle.wtf"
-  url "https://github.com/mle-wtf/lair-releases/releases/download/v26.8.5955/lair-minion-26.8.5955-macos-universal.tar.gz"
-  sha256 "a4e638f5e12bdd51956e18ccb2ff4904e1785b9fccd0241f25bd2c595f03b95f"
+  url "https://github.com/mle-wtf/lair-releases/releases/download/v26.11.82/lair-macos-universal.tar.gz"
+  version "26.11.82"
+  sha256 "4c4368e1877bfb3eb412df44f3b983165ae61e2609d0181b085337e28cf57271"
 
   # A universal binary, so one bottle-less formula serves both arches. The
   # tarball is prebuilt because the source repo is private and brew could not
-  # fetch it to build from.
+  # fetch it to build from. Renamed from lair-minion (formula_renames.json).
   def install
-    bin.install "minion" => "lair-minion"
+    bin.install "lair"
     doc.install "README.md" if File.exist?("README.md")
   end
 
@@ -16,10 +17,10 @@ class LairMinion < Formula
   # --headless because the tray wants an app bundle and this is a bare binary;
   # under launchd there is no session to draw a status item into anyway.
   service do
-    run [opt_bin/"lair-minion", "run", "--headless"]
+    run [opt_bin/"lair", "run", "--headless"]
     keep_alive true
-    log_path var/"log/lair-minion.log"
-    error_log_path var/"log/lair-minion.log"
+    log_path var/"log/lair.log"
+    error_log_path var/"log/lair.log"
   end
 
   def caveats
@@ -27,11 +28,11 @@ class LairMinion < Formula
       The minion needs to be paired with your phone once before it can do
       anything. Pair it in a terminal, where it can draw the QR code:
 
-        lair-minion pair
+        lair pair
 
       Then start it in the background:
 
-        brew services start lair-minion
+        brew services start lair
 
       It answers through your own CLI agent, which it does not install. Point
       it at one in ~/.config/lair/minion.toml:
@@ -44,11 +45,8 @@ class LairMinion < Formula
   end
 
   test do
-    # Measured, not assumed: with no subcommand the binary writes its usage to
-    # STDERR and exits 2. Both matter — without the redirect there is nothing on
-    # stdout to match, and without the expected status shell_output raises. An
-    # earlier version of this block asserted neither, because the check that
-    # produced it piped through `head` and read `head`'s exit code.
-    assert_match "minion run", shell_output("#{bin}/lair-minion 2>&1", 2)
+    # A bare `lair` is the chat and fails without a terminal; an unknown verb
+    # prints the usage to STDERR and exits 2.
+    assert_match "lair run", shell_output("#{bin}/lair help 2>&1", 2)
   end
 end
