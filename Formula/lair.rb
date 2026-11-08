@@ -1,9 +1,9 @@
 class Lair < Formula
   desc "Desktop half of LAIR: bridges your local CLI coding agent to your phone"
   homepage "https://lair.mle.wtf"
-  url "https://github.com/mle-wtf/lair-releases/releases/download/v26.11.2075/lair-macos-universal.tar.gz"
-  version "26.11.2075"
-  sha256 "a31c559d48158e7d1bcd08fe09c0d71296c56b966c4893ffb4cab3739310500b"
+  url "https://github.com/mle-wtf/lair-releases/releases/download/v26.11.2110/lair-macos-universal.tar.gz"
+  version "26.11.2110"
+  sha256 "6327ac5b42888c909280f26a99f20518ae29627e882ff5482ad7075ddcca16a5"
 
   # A universal binary, so one bottle-less formula serves both arches. The
   # tarball is prebuilt because the source repo is private and brew could not
